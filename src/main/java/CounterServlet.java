@@ -1,3 +1,4 @@
+
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
 import javax.servlet.http.HttpServlet;
@@ -13,6 +14,15 @@ public class CounterServlet extends HttpServlet {
 
         @Override
         protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+
+            try {
+                if (request.getParameter("reset").equals("1")) {
+                    counter = 0;
+                }
+            } catch (NullPointerException ex) {
+                ex.printStackTrace();
+            }
+
             counter++;
             response.setContentType("text/html");
             PrintWriter out = response.getWriter();
